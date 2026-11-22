@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080a0e">
+<title>PRIME — Built Different</title>
+
+<style>
+:root {
+  --bg: #080a0e;
+  --panel: #111720;
+  --line: #28313e;
+  --ice: #a9d9ff;
+  --white: #f4f7fb;
+  --muted: #9ba6b5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+header {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  border-bottom: 1px solid var(--line);
+  background: rgba(8,10,14,.95);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
+
+.logo span {
+  color: var(--ice);
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.menu-button {
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 25px;
+  display: none;
+}
+
+.hero {
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 70px 20px;
+  background:
+    linear-gradient(rgba(5,8,13,.35), rgba(5,8,13,.9)),
+    url("98FBC773-87EC-4C4B-8931-1C3161D72DFE.png")
+    center / cover no-repeat;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.eyebrow {
+  color: var(--ice);
+  letter-spacing: 5px;
+  font-size: 12px;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 10vw, 100px);
+  font-weight: 900;
+  letter-spacing: 8px;
+}
+
+.hero h1 span {
+  color: var(--ice);
+}
+
+.hero p {
+  color: #d0d8e2;
+  margin: 20px auto 30px;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.primary-button {
+  display: inline-block;
+  padding: 15px 30px;
+  border: 1px solid var(--ice);
+  color: var(--bg);
+  background: var(--ice);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: .2s;
+}
+
+.primary-button:hover {
+  background: transparent;
+  color: var(--ice);
+}
+
+section {
+  padding: 85px 7%;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.section-heading small {
+  color: var(--ice);
+  letter-spacing: 4px;
+}
+
+.section-heading h2 {
+  font-size: clamp(30px, 5vw, 46px);
+  margin-top: 12px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 1250px;
+  margin: auto;
+}
+
+.product {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 25px 18px;
+  text-align: center;
+  transition: .25s;
+}
+
+.product:hover {
+  border-color: var(--ice);
+  transform: translateY(-5px);
+}
+
+.tin {
+  height: 145px;
+  width: 145px;
+  max-width: 100%;
+  border-radius: 50%;
+  margin: 0 auto 25px;
+  border: 2px solid #65788d;
+  background:
+    radial-gradient(circle at 35% 30%, #344b61, #111720 65%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 15px 35px #0008;
+}
+
+.tin strong {
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+.tin span {
+  color: var(--ice);
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.product h3 {
+  font-size: 17px;
+  margin-bottom: 9px;
+}
+
+.product p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.price {
+  color: var(--ice);
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 18px;
+}
+
+.info {
+  background: #0d1219;
+  text-align: center;
+}
+
+.info-grid {
+  max-width: 1000px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.info-card {
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.info-card h3 {
+  color: var(--ice);
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.about {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.about p {
+  color: var(--muted);
+  line-height: 1.9;
+  margin-top: 20px;
+}
+
+footer {
+  padding: 35px 6%;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer a {
+  color: var(--ice);
+  text-decoration: none;
+}
+
+.notice {
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 750px;
+  margin: 25px auto 0;
+  line-height: 1.7;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 0 5%;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    background: var(--panel);
+    flex-direction: column;
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .hero {
+    min-height: 500px;
+  }
+
+  section {
+    padding: 65px 5%;
+  }
+
+  .products {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .product {
+    padding: 20px 10px;
+  }
+
+  .tin {
+    height: 115px;
+    width: 115px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div class="logo">PRIME<span>.</span></div>
+
+  <nav id="navigation">
+    <a href="#home" onclick="closeMenu()">HOME</a>
+    <a href="#products" onclick="closeMenu()">PRODUKTE</a>
+    <a href="#about" onclick="closeMenu()">ÜBER UNS</a>
+    <a href="#contact" onclick="closeMenu()">KONTAKT</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">BUILT DIFFERENT</div>
+      <h1>PRIME<span>.</span></h1>
+      <p>
+        Eine moderne Produktidee mit eigenständigem Design,
+        klarer Identität und einem unverwechselbaren Auftritt.
+      </p>
+      <a href="#products" class="primary-button">ENTDECKEN</a>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="section-heading">
+      <small>THE COLLECTION</small>
+      <h2>Unsere Produktideen</h2>
+      <p>Fünf Geschmacksrichtungen als unverbindliche Konzeptentwürfe.</p>
+    </div>
+
+    <div class="products">
+      <article class="product">
+        <div class="tin">
+          <strong>PRIME</strong>
+          <span>ARCTIC MINT</span>
+        </div>
+        <h3>Arctic Mint</h3>
+        <p>Ein frisches, klares Designkonzept.</p>
+        <div class="price">7,00 €*</div>
+      </article>
+
+      <article class="product">
+        <div class="tin">
+          <strong>PRIME</strong>
+          <span>POLAR BERRY</span>
+        </div>
+        <h3>Polar Berry</h3>
+        <p>Ein fruchtiges Designkonzept.</p>
+        <div class="price">7,00 €*</div>
+      </article>
+
+      <article class="product">
+        <div class="tin">
+          <strong>PRIME</strong>
+          <span>CITRUS ICE</span>
+        </div>
+        <h3>Citrus Ice</h3>
+        <p>Ein zitrisches Designkonzept.</p>
+        <div class="price">7,00 €*</div>
+      </article>
+
+      <article class="product">
+        <div class="tin">
+          <strong>PRIME</strong>
+          <span>BLACK CHERRY</span>
+        </div>
+        <h3>Black Cherry</h3>
+        <p>Ein dunkles, fruchtiges Designkonzept.</p>
+        <div class="price">7,00 €*</div>
+      </article>
+
+      <article class="product">
+        <div class="tin">
+          <strong>PRIME</strong>
+          <span>FRESH APPLE</span>
+        </div>
+        <h3>Fresh Apple</h3>
+        <p>Ein frisches Apfel-Designkonzept.</p>
+        <div class="price">7,00 €*</div>
+      </article>
+    </div>
+
+    <p class="notice">
+      *Unverbindliche Konzeptpreise. Keine tatsächlichen Produkte,
+      keine Bestellmöglichkeit und kein Verkauf.
+    </p>
+  </section>
+
+  <section class="info">
+    <div class="section-heading">
+      <small>OUR IDENTITY</small>
+      <h2>Was PRIME ausmacht</h2>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>DESIGN</h3>
+        <p>Ein klarer, moderner und wiedererkennbarer Markenauftritt.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>IDENTITY</h3>
+        <p>Eine eigenständige Idee mit einem starken visuellen Stil.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>VISION</h3>
+        <p>Eine Marke, deren Konzept sorgfältig weiterentwickelt wird.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <div class="section-heading">
+        <small>ABOUT PRIME</small>
+        <h2>Built Different.</h2>
+      </div>
+      <p>
+        PRIME steht für eine moderne Markenidee.
+        Von der Gestaltung der Verpackung bis zur Auswahl
+        der Produktkonzepte soll jedes Detail eine klare
+        und eigenständige Identität vermitteln.
+      </p>
+      <p>
+        Die dargestellten Produkte sind reine Konzeptentwürfe.
+        Es werden keine gesundheitsbezogenen Wirkungen versprochen.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div>
+    <strong>PRIME.</strong><br>
+    Built Different.
+  </div>
+
+  <div>
+    Kontakt: <a href="mailto:primee@gmail.com">primee@gmail.com</a>
+  </div>
+
+  <div>© 2026 PRIME — Concept Website</div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById("navigation").classList.toggle("open");
+}
+
+function closeMenu() {
+  document.getElementById("navigation").classList.remove("open");
+}
+</script>
+
+</body>
+</html>
