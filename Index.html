@@ -1,0 +1,568 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080a0e">
+<title>PRIME | Built Different</title>
+
+<style>
+:root {
+  --bg: #080a0e;
+  --panel: #111720;
+  --line: #28313e;
+  --ice: #a9d9ff;
+  --white: #f4f7fb;
+  --muted: #9ba6b5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: Arial, sans-serif;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+header {
+  height: 76px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #080a0ef5;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 29px;
+  font-weight: 900;
+  letter-spacing: 7px;
+}
+
+.logo span { color: var(--ice); }
+
+.icon-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 15px;
+}
+
+.hero {
+  min-height: 570px;
+  padding: 8%;
+  display: flex;
+  align-items: end;
+  background:
+    linear-gradient(0deg,#080a0e 0%,#080a0e44 60%,#080a0e10),
+    url("hero.jpg") center/cover no-repeat;
+}
+
+.hero-content { max-width: 650px; }
+
+.eyebrow {
+  color: var(--ice);
+  letter-spacing: 5px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(55px, 10vw, 110px);
+  line-height: .9;
+  margin: 20px 0;
+  letter-spacing: -5px;
+}
+
+.hero p {
+  color: #c1cbd8;
+  line-height: 1.7;
+}
+
+.primary-btn {
+  display: inline-block;
+  padding: 15px 25px;
+  background: white;
+  color: #080a0e;
+  border: 0;
+  font-weight: 900;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+section {
+  max-width: 1250px;
+  margin: auto;
+  padding: 75px 5%;
+}
+
+.section-title {
+  font-size: clamp(30px, 5vw, 52px);
+  margin: 12px 0 35px;
+}
+
+.muted { color: var(--muted); }
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.product {
+  background: linear-gradient(145deg,#17202b,#0c1016);
+  border: 1px solid var(--line);
+  padding: 18px;
+  border-radius: 12px;
+}
+
+.tin {
+  width: 145px;
+  height: 145px;
+  max-width: 100%;
+  margin: 10px auto 25px;
+  border-radius: 50%;
+  border: 5px solid #465363;
+  background: radial-gradient(circle at 35% 25%,#62758a,#141a23 48%,#050608);
+  box-shadow: inset 0 0 20px #000,0 15px 30px #0009;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tin strong {
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+.product h3 { margin-bottom: 8px; }
+
+.price {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.quantity {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #080a0e;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+
+.order-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #eaf4ff;
+  color: #080a0e;
+  border: 0;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
+
+.info-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 25px;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+
+footer {
+  padding: 40px 5%;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+footer a { color: var(--ice); }
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #000b;
+  display: none;
+}
+
+.drawer.active { display: block; }
+
+.drawer-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(360px,88vw);
+  background: #10151d;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+.drawer.right .drawer-content {
+  right: 0;
+}
+
+.drawer-link {
+  display: block;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  color: white;
+  text-decoration: none;
+}
+
+.close-btn {
+  float: right;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000d;
+  z-index: 30;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.active { display: flex; }
+
+.modal-content {
+  background: #111720;
+  border: 1px solid #35465a;
+  padding: 30px;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.modal-content h2 { margin-top: 0; }
+
+.modal-content button {
+  padding: 13px;
+  border: 0;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.confirm {
+  background: white;
+  color: black;
+}
+
+.cancel {
+  background: #29313e;
+  color: white;
+}
+
+.notice {
+  border: 1px solid #65532d;
+  background: #1a170f;
+  padding: 18px;
+  border-radius: 9px;
+  color: #e9d8b4;
+  line-height: 1.7;
+}
+
+@media(max-width:950px) {
+  .products { grid-template-columns: repeat(2,1fr); }
+  .info-grid { grid-template-columns: 1fr; }
+}
+
+@media(max-width:480px) {
+  .products { grid-template-columns: 1fr; }
+  .product {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0 15px;
+    align-items: center;
+  }
+  .tin {
+    width: 105px;
+    height: 105px;
+    grid-row: span 4;
+  }
+  .hero { min-height: 500px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="icon-btn" onclick="toggleDrawer('menu')">☰</button>
+  <div class="logo">PR<span>I</span>ME</div>
+  <button class="icon-btn" onclick="toggleDrawer('cart')">
+    Warenkorb (<span id="cartCount">0</span>)
+  </button>
+</header>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">PERFORMANCE BRAND</div>
+    <h1>BUILT<br>DIFFERENT.</h1>
+    <p>
+      A NEW STANDARD. A NEW IDENTITY.
+      Willkommen bei PRIME.
+    </p>
+    <a href="#collection" class="primary-btn">
+      DISCOVER PRIME →
+    </a>
+  </div>
+</div>
+
+<section id="collection">
+  <div class="eyebrow">THE COLLECTION</div>
+  <h2 class="section-title">FIVE FLAVOURS.</h2>
+
+  <div class="products" id="products"></div>
+
+  <p class="muted">
+    Die fünf Sorten sind Designkonzepte. Ein Verkauf findet
+    derzeit nicht statt.
+  </p>
+</section>
+
+<section id="about">
+  <div class="eyebrow">THE PRIME STANDARD</div>
+  <h2 class="section-title">MADE WITH INTENTION.</h2>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>01 / MADE IN GERMANY</h3>
+      <p class="muted">
+        Eine geplante deutsche Markenidentität.
+        Eine Herkunftsangabe erfolgt erst nach entsprechender Prüfung.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>02 / OUR VISION</h3>
+      <p class="muted">
+        Modernes Design, klare Werte und eine eigenständige
+        Produktidee.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>03 / TRANSPARENCY</h3>
+      <p class="muted">
+        Sicherheit, Inhaltsstoffe und Produktangaben
+        sollen transparent geprüft werden.
+      </p>
+    </div>
+  </div>
+
+  <div class="notice" style="margin-top:25px">
+    PRIME ist aktuell eine Konzeptmarke. Die Produktrezeptur,
+    rechtliche Einstufung und Produktsicherheit sind noch nicht
+    bestätigt. Es werden keine Bestellungen angenommen.
+  </div>
+</section>
+
+<section id="contact">
+  <div class="eyebrow">GET IN TOUCH</div>
+  <h2 class="section-title">CONTACT PRIME.</h2>
+  <p class="muted">Fragen zur Marke oder Zusammenarbeit?</p>
+  <a class="primary-btn" href="mailto:primee@gmail.com">
+    primee@gmail.com
+  </a>
+</section>
+
+<footer>
+  <div>
+    <div class="logo">PRIME.</div>
+    <p>BUILT DIFFERENT.</p>
+  </div>
+  <div>
+    CONTACT<br>
+    <a href="mailto:primee@gmail.com">primee@gmail.com</a>
+  </div>
+  <div>© PRIME Brand Concept</div>
+</footer>
+
+<!-- MENU -->
+
+<div class="drawer" id="menu" onclick="outsideClose(event,'menu')">
+  <div class="drawer-content">
+    <button class="icon-btn close-btn"
+      onclick="toggleDrawer('menu')">✕</button>
+
+    <h2 class="logo">PRIME.</h2>
+
+    <a class="drawer-link" href="#collection"
+      onclick="toggleDrawer('menu')">Collection</a>
+
+    <a class="drawer-link" href="#about"
+      onclick="toggleDrawer('menu')">About PRIME</a>
+
+    <a class="drawer-link" href="#contact"
+      onclick="toggleDrawer('menu')">Contact</a>
+
+    <a class="drawer-link" href="mailto:primee@gmail.com">
+      Email: primee@gmail.com
+    </a>
+  </div>
+</div>
+
+<!-- CART -->
+
+<div class="drawer right" id="cart"
+  onclick="outsideClose(event,'cart')">
+  <div class="drawer-content">
+    <button class="icon-btn close-btn"
+      onclick="toggleDrawer('cart')">✕</button>
+
+    <h2>Warenkorb</h2>
+    <p class="muted">PRIME Produktkonzept</p>
+
+    <div id="cartItems"></div>
+
+    <div class="notice">
+      Der Warenkorb ist nur eine Designvorschau.
+      Bestellungen und Zahlungen sind deaktiviert.
+    </div>
+  </div>
+</div>
+
+<!-- AGE CONFIRMATION -->
+
+<div class="modal" id="ageModal">
+  <div class="modal-content">
+    <div class="eyebrow">PRIME / 18+</div>
+    <h2>Altersbestätigung</h2>
+    <p class="muted">
+      Die geplanten Pouches sind ausschließlich für Erwachsene
+      ab 18 Jahren vorgesehen. Bist du mindestens 18 Jahre alt?
+    </p>
+
+    <button class="cancel" onclick="closeAge()">
+      Abbrechen
+    </button>
+
+    <button class="confirm" onclick="confirmAge()">
+      Ich bin 18+
+    </button>
+
+    <p id="ageMessage" class="muted"></p>
+  </div>
+</div>
+
+<script>
+const products = [
+  {name:"Arctic Mint", number:"01"},
+  {name:"Polar Berry", number:"02"},
+  {name:"Citrus Ice", number:"03"},
+  {name:"Black Cherry", number:"04"},
+  {name:"Fresh Apple", number:"05"}
+];
+
+let cart = [];
+
+const productContainer = document.getElementById("products");
+
+products.forEach((product,index) => {
+  productContainer.innerHTML += `
+    <article class="product">
+      <div class="tin"><strong>PRIME</strong></div>
+      <div>
+        <h3>${product.name}</h3>
+        <p class="muted">Flavour concept ${product.number}</p>
+        <div class="price">7,00 € / Dose</div>
+
+        <select class="quantity" id="quantity${index}">
+          ${[1,2,3,4,5,6,7,8,9,10].map(n =>
+            `<option value="${n}">${n} Dose${n>1?"n":""}</option>`
+          ).join("")}
+        </select>
+
+        <button class="order-btn"
+          onclick="requestOrder(${index})">
+          Bestellen
+        </button>
+      </div>
+    </article>
+  `;
+});
+
+function toggleDrawer(id) {
+  document.getElementById(id).classList.toggle("active");
+}
+
+function outsideClose(event,id) {
+  if(event.target.id === id) toggleDrawer(id);
+}
+
+let selectedProduct = null;
+
+function requestOrder(index) {
+  selectedProduct = index;
+  document.getElementById("ageMessage").textContent = "";
+  document.getElementById("ageModal").classList.add("active");
+}
+
+function closeAge() {
+  document.getElementById("ageModal").classList.remove("active");
+}
+
+function confirmAge() {
+  document.getElementById("ageMessage").textContent =
+    "Danke für deine Bestätigung. Bestellungen sind derzeit noch nicht verfügbar.";
+}
+
+function addToCart(index) {
+  const quantity = Number(
+    document.getElementById("quantity" + index).value
+  );
+
+  const existing = cart.find(item => item.index === index);
+
+  if(existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({index,quantity});
+  }
+
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((sum,item) => sum + item.quantity,0);
+
+  document.getElementById("cartCount").textContent = count;
+
+  document.getElementById("cartItems").innerHTML =
+    cart.map(item => `
+      <div class="info-card" style="margin:12px 0">
+        <strong>${products[item.index].name}</strong>
+        <p class="muted">${item.quantity} Dose(n)</p>
+        <p>Geplanter Wert: ${(item.quantity*7).toFixed(2)} €</p>
+      </div>
+    `).join("");
+}
+</script>
+
+</body>
+</html>
